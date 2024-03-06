@@ -5,6 +5,12 @@ class Animal:
         self.__chip_num = chip_num
         self._vaccine = vaccine
 
+    def get_chip_num(self):
+        return self.__chip_num
+
+    def get_vaccine(self):
+        return self._vaccine
+
 
 class Cat(Animal):
     def info(self):
@@ -32,6 +38,13 @@ for animal in (cat1, dog1):
     animal.make_sound()
 
 
-# print(cat1.__dict__)
-# print(dog1.__dict__)
+print(cat1.__dict__)
+print(dog1.__dict__)
+
 # print(cat1._vaccine)
+# print(dog1.__chip_num)  # AttributeError
+
+print(cat1.get_vaccine())
+print(dog1.get_chip_num())
+
+

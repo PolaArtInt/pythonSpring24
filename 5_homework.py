@@ -1,20 +1,22 @@
 class Animal:
     def __init__(self, name, age, chip_num=0, vaccine=None):
         self.name = name
-        self.age = age
-        self.__chip_num = chip_num
-        self._vaccine = vaccine
+        self.age = age  # public attr
+        self._vaccine = vaccine  # protected attr
+        self.__chip_num = chip_num  # private attr
 
-    def get_chip_num(self):
-        return self.__chip_num
-
-    def get_vaccine(self):
+    @property
+    def _get_vaccine(self):  # protected method
         return self._vaccine
+
+    @property
+    def __get_chip_num(self):  # private method
+        return self.__chip_num
 
 
 class Cat(Animal):
     def info(self):
-        print(f'I am a cat. My name is {self.name}. I am {self.age} years old.')
+        print(f'Hello! My name is {self.name}. I am {self.age} years old.')
 
     @staticmethod
     def make_sound():
@@ -23,7 +25,7 @@ class Cat(Animal):
 
 class Dog(Animal):
     def info(self):
-        print(f'I am a dog. My name is {self.name}. I am {self.age} years old.')
+        print(f'Hi! My name is {self.name}. I am {self.age} years old.')
 
     @staticmethod
     def make_sound():
@@ -37,14 +39,15 @@ for animal in (cat1, dog1):
     animal.info()
     animal.make_sound()
 
-
 print(cat1.__dict__)
 print(dog1.__dict__)
 
-# print(cat1._vaccine)
-# print(dog1.__chip_num)  # AttributeError
+print(cat1._vaccine)  # protected atribute
+print(cat1._get_vaccine)  # protected method
 
-print(cat1.get_vaccine())
-print(dog1.get_chip_num())
+# print(Cat.__get_chip_num)  # AttributeError (private method)
+# print(dog1.__chip_num)  # AttributeError (private atribute)
+# print(dog1.__get_chip_num)  # AttributeError (private method)
 
-
+print(f'Access to private atribute: {cat1._Animal__chip_num}')
+print(f'Access to private method: {dog1._Animal__get_chip_num}')

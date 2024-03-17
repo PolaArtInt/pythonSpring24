@@ -6,12 +6,26 @@ class Animal:
         self.__chip_num = chip_num  # private attr
 
     @property
-    def _get_vaccine(self):  # protected method
+    def vaccine(self):  # protected method
         return self._vaccine
 
+    @vaccine.setter
+    def vaccine(self, new_vaccine):
+        if self.vaccine is not None:
+            self._vaccine = new_vaccine
+        else:
+            print('Pet is not vaccinated')
+
     @property
-    def __get_chip_num(self):  # private method
+    def chip_num(self):  # private method
         return self.__chip_num
+
+    @chip_num.setter
+    def chip_num(self, new_chip_num):
+        if self.chip_num is not None:
+            self.__chip_num = new_chip_num
+        else:
+            print('Pet has no chip')
 
 
 class Cat(Animal):
@@ -42,12 +56,12 @@ for animal in (cat1, dog1):
 print(cat1.__dict__)
 print(dog1.__dict__)
 
-print(cat1._vaccine)  # protected atribute
-print(cat1._get_vaccine)  # protected method
+# print(cat1._vaccine)  # protected atribute
+print(cat1.vaccine)  # protected method
 
-# print(Cat.__get_chip_num)  # AttributeError (private method)
+# print(Cat.chip_num)  # <property object... (private method)
 # print(dog1.__chip_num)  # AttributeError (private atribute)
-# print(dog1.__get_chip_num)  # AttributeError (private method)
+print(dog1.chip_num)  # AttributeError (private method)
 
-print(f'Access to private atribute: {cat1._Animal__chip_num}')
-print(f'Access to private method: {dog1._Animal__get_chip_num}')
+# print(f'Access to private atribute: {cat1._Animal__chip_num}')  # not recomended
+# print(f'Access to private method: {dog1._Animal__chip_num}')  # not recomended
